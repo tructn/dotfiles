@@ -17,51 +17,98 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/0.x' }
+Plug 'preservim/nerdcommenter'
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'elzr/vim-json'
+Plug 'styled-components/vim-styled-components'
+Plug 'vim-airline/vim-airline'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rakr/vim-one'
 call plug#end()
 
-filetype indent on      " load filetype-specific indent files
-syntax enable
-
-colorscheme default
-set noeb vb t_vb=
+let g:airline_theme='one'
+colorscheme one
 set background=dark
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-@> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+if (index(['vim','help'], &filetype) >= 0)
+  execute 'h '.expand('<cword>')
+elseif (coc#rpc#ready())
+  call CocActionAsync('doHover')
+else
+  execute '!' . &keywordprg . " " . expand('<cword>')
+endif
+endfunction
+
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+filetype indent on      
+filetype plugin on     
+syntax enable
+set termguicolors
+set noeb vb t_vb=
 set noerrorbells
 set termguicolors
 set nowrap
-set tabstop=2    	  " number of visual spaces per TAB
-set softtabstop=2   	" number of spaces in tab when editing
+set tabstop=2
+set softtabstop=2
 set shiftwidth=2
-set expandtab       	" tabs are spaces
-set number          	" show line numbers
-set showcmd         	" show command in bottom bar
-set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to.
-set showmatch           " highlight matching [{()}]
-set incsearch           " search as characters are entered
-set hlsearch            " highlight matches
+set expandtab       	
+set number          
+set showcmd        
+set wildmenu      
+set lazyredraw   
+set showmatch   
+set incsearch  
+set hlsearch  
 set noswapfile
 set backspace=indent,eol,start
 set encoding=UTF-8
 
-" move vertically by visual line
+let mapleader=","       
+
 nnoremap j gj
 nnoremap k gk
 
-" move to beginning/end of line
 nnoremap B ^
 nnoremap E $
 
-" $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
-
-" highlight last inserted text
 nnoremap gV `[v`]
 
-let mapleader=","       " leader is comma
-
-" jj or jk is escape
 inoremap jj <esc>
 
 nnoremap <leader>a :Ag
