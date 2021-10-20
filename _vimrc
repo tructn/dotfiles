@@ -1,12 +1,6 @@
-if empty(glob('$HOME/vimfiles/autoload/plug.vim'))
-  silent !curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
 call plug#begin('$HOME/vimfiles/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
@@ -15,24 +9,19 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'leafgarland/typescript-vim'
 Plug 'kien/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/0.x' }
 Plug 'preservim/nerdcommenter'
 Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'elzr/vim-json'
-Plug 'styled-components/vim-styled-components'
 Plug 'vim-airline/vim-airline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rakr/vim-one'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-let g:airline_theme='one'
 colorscheme one
-set background=dark
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
@@ -46,18 +35,7 @@ let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
-
-" Use `[g` and `]g` to navigate diagnostics
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -82,9 +60,9 @@ set noeb vb t_vb=
 set noerrorbells
 set termguicolors
 set nowrap
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab       	
 set number          
 set showcmd        
@@ -129,3 +107,7 @@ map <F12> :ALEGoToDefinition<CR>
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
