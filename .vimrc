@@ -5,72 +5,48 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/0.x' }
 Plug 'preservim/nerdcommenter'
-
-# Javascript
 Plug 'pangloss/vim-javascript'
-
-# JSX
 Plug 'MaxMEllon/vim-jsx-pretty'
-
-# JSON
 Plug 'elzr/vim-json'
-
-# GraphQL
 Plug 'jparise/vim-graphql'
-
-# Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
-
-# SCSS
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-
-# Rust
 Plug 'rust-lang/rust.vim'
-
-# Theme
 Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'vim-airline/vim-airline'
 Plug 'drewtempelmeyer/palenight.vim'
-
-# Auto Pairs
 Plug 'jiangmiao/auto-pairs'
-
-# Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-# Setup VIM colorscheme
 set background=dark
-colorscheme palenight
+let g:palenight_terminal_italics=1
 let g:airline_theme = "palenight"
+colorscheme palenight
 if (has("termguicolors"))
   set termguicolors
 endif
-let g:palenight_terminal_italics=1
-let g:palenight_color_overrides = {
-/ 'black': { 'gui': '#000000', "cterm": "0", "cterm16": "0"  },
-/ }
 
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
-\'coc-json',
-\'coc-css',
-\'coc-ultisnips',
-\'coc-tsserver',
-\'coc-emmet',
-\'coc-tag',
-\'coc-omni',
-\'coc-syntax',
-\'coc-yaml',
-\'coc-solargraph',
-\'coc-phpls',
-\'coc-html',
-\'coc-tailwindcss',
-\'coc-markdownlint',
-\'coc-git'
+  \'coc-json',
+  \'coc-css',
+  \'coc-ultisnips',
+  \'coc-tsserver',
+  \'coc-emmet',
+  \'coc-tag',
+  \'coc-omni',
+  \'coc-syntax',
+  \'coc-yaml',
+  \'coc-solargraph',
+  \'coc-phpls',
+  \'coc-html',
+  \'coc-tailwindcss',
+  \'coc-markdownlint',
+  \'coc-git'
 \]
 
 syntax enable
@@ -132,3 +108,6 @@ let g:prettier#autoformat = 0
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+
+
