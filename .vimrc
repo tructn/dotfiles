@@ -79,6 +79,8 @@ nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 nnoremap <C-s> :w<CR>
+vnoremap <silent><C-s> <C-c>:update<cr>gv
+inoremap <silent><C-s> <C-o>:update<cr>
 nnoremap <C-q> :quit!<CR>
 nnoremap <C-o> o<Esc>
 inoremap jj <esc>
