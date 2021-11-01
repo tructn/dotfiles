@@ -53,16 +53,13 @@ syntax enable
 filetype indent on      
 filetype plugin on     
 filetype indent on
-set termguicolors
-set noeb vb t_vb=
 set noerrorbells
 set visualbell
 set t_vb=
-set termguicolors
 set nowrap
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab       	
 set number          
 set showcmd        
@@ -75,39 +72,24 @@ set noswapfile
 set backspace=indent,eol,start
 set encoding=UTF-8
 
-let mapleader=","       
-
-nnoremap j gj
-nnoremap k gk
+let mapleader=" "
 
 nnoremap B ^
 nnoremap E $
-
 nnoremap $ <nop>
 nnoremap ^ <nop>
-nnoremap gV `[v`]
-
-inoremap jj <esc>
-
-nnoremap <leader>a :Ag
 nnoremap <C-s> :w<CR>
-vnoremap <silent><C-s> <C-c>:update<cr>gv
-inoremap <silent><C-s> <C-o>:update<cr>
 nnoremap <C-q> :quit!<CR>
 nnoremap <C-o> o<Esc>
+inoremap jj <esc>
+map <F8> ggVG
+map <F3> :NERDTreeToggle<CR>
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-map <F8> ggVG
-map <F3> :NERDTreeToggle<CR>
-
 let g:prettier#autoformat = 0
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-
-
-
