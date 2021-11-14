@@ -17,6 +17,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+Plug 'drewtempelmeyer/palenight.vim'
 call plug#end()
 
 set background=dark
