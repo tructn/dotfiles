@@ -1,4 +1,6 @@
-# Using Vim in Windows
+# dotfiles
+
+## Configure Vim plugins for Windows
 
 Run below command in Powershell to install VimPlug
 
@@ -7,12 +9,8 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
 
-Copy paste content of vimrc to below
+### .vimrc file in Windows
 
 ```
 vim $HOME/_vimrc
 ```
-
-Reference
-
-- https://github.com/junegunn/vim-plug

@@ -1,6 +1,5 @@
 call plug#begin('$HOME/vimfiles/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/0.x' }
@@ -8,60 +7,31 @@ Plug 'preservim/nerdcommenter'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'elzr/vim-json'
-Plug 'jparise/vim-graphql'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'rust-lang/rust.vim'
-Plug 'dracula/vim', { 'as': 'dracula'  }
-Plug 'vim-airline/vim-airline'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
-Plug 'drewtempelmeyer/palenight.vim'
 call plug#end()
 
-set background=dark
-let g:palenight_terminal_italics=1
-let g:airline_theme = "palenight"
-colorscheme palenight
-if (has("termguicolors"))
-  set termguicolors
-endif
+colorscheme gruvbox
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
 
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-let g:coc_start_at_startup = 1
-let g:coc_global_extensions = [
-  \'coc-json',
-  \'coc-css',
-  \'coc-ultisnips',
-  \'coc-tsserver',
-  \'coc-emmet',
-  \'coc-tag',
-  \'coc-omni',
-  \'coc-syntax',
-  \'coc-yaml',
-  \'coc-solargraph',
-  \'coc-phpls',
-  \'coc-html',
-  \'coc-tailwindcss',
-  \'coc-markdownlint',
-  \'coc-git'
-\]
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 syntax enable
 filetype indent on      
 filetype plugin on     
 filetype indent on
-set noerrorbells
-set visualbell
-set t_vb=
+
 set nowrap
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab       	
 set number          
 set showcmd        
@@ -73,8 +43,37 @@ set hlsearch
 set noswapfile
 set backspace=indent,eol,start
 set encoding=UTF-8
+set noerrorbells visualbell t_vb=
 
-let mapleader=" "
+" Configuration for COC
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 nnoremap B ^
 nnoremap E $
@@ -89,6 +88,7 @@ inoremap jj <esc>
 map <F8> ggVG
 map <F3> :NERDTreeToggle<CR>
 
+let mapleader=" "
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'r'
@@ -96,4 +96,6 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:prettier#autoformat = 0
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#tab_width = '4'
+
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
