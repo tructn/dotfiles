@@ -1,9 +1,8 @@
 # dotfiles
 
-## Configure Vim plugins for Windows
+## VIM
 
-Run below command in Powershell to install VimPlug
-
+### Install vimplug
 ```
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
@@ -14,3 +13,15 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 ```
 vim $HOME/_vimrc
 ```
+
+## NeoVim
+
+### Install vimplug
+```
+iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
+```
+
+### init.vim
+Create init.vim in C:\Users\trucn\AppData\Local\nvim
+
